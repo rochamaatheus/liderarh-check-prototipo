@@ -56,7 +56,8 @@
       <div class="text-center mb-10">
         <div class="brand-mark">LC</div>
         <h1 class="text-xl font-semibold tracking-tight">LIDERARH Check</h1>
-        <p class="text-sm text-gray-500 mt-1">Check-in emocional e gestão de riscos psicossociais</p>
+        <p class="text-xs text-gray-400 mt-0.5">por Camila Haas</p>
+        <p class="text-sm text-gray-500 mt-2">Check-in emocional e gestão de riscos psicossociais</p>
       </div>
 
       <div class="field-group">
@@ -337,15 +338,15 @@
         <p class="card-eyebrow card-eyebrow-padded">Equipes por nível de risco</p>
         <button class="equipe-row" data-equipe="Vendas" data-risco="Baixo">
           <span class="equipe-row-label"><i class="dot dot-light"></i>Vendas</span>
-          <span class="equipe-row-value">Baixo · 12 pessoas &rsaquo;</span>
+          <span class="equipe-row-value"><span class="risk-badge risk-badge-light">Baixo</span>12 pessoas &rsaquo;</span>
         </button>
         <button class="equipe-row" data-equipe="Operações" data-risco="Médio">
           <span class="equipe-row-label"><i class="dot dot-mid"></i>Operações</span>
-          <span class="equipe-row-value">Médio · 8 pessoas &rsaquo;</span>
+          <span class="equipe-row-value"><span class="risk-badge risk-badge-mid">Médio</span>8 pessoas &rsaquo;</span>
         </button>
         <button class="equipe-row equipe-row-last" data-equipe="Logística" data-risco="Alto">
           <span class="equipe-row-label"><i class="dot dot-dark"></i>Logística</span>
-          <span class="equipe-row-value">Alto · 4 pessoas &rsaquo;</span>
+          <span class="equipe-row-value"><span class="risk-badge risk-badge-dark">Alto</span>4 pessoas &rsaquo;</span>
         </button>
       </div>
 
@@ -406,6 +407,8 @@
     </header>
 
     <div class="screen-body">
+      <p class="text-xs text-gray-400">Geração de relatório de riscos ocupacionais</p>
+
       <div class="card">
         <p class="card-eyebrow">Período do relatório</p>
         <p class="text-sm font-medium">01/10/2025 a 22/10/2025</p>
@@ -413,17 +416,17 @@
 
       <div class="card">
         <p class="card-eyebrow">Resumo</p>
-        <div class="summary-row"><span>Riscos psicossociais identificados</span><span class="summary-value">3</span></div>
-        <div class="summary-row"><span>Ações preventivas cadastradas</span><span class="summary-value">5</span></div>
-        <div class="summary-row summary-row-last"><span>Conformidade com o exigido</span><span class="summary-value">92%</span></div>
+        <div class="summary-row"><span>✓ Riscos psicossociais identificados</span><span class="summary-value">3</span></div>
+        <div class="summary-row"><span>✓ Ações preventivas cadastradas</span><span class="summary-value">5</span></div>
+        <div class="summary-row summary-row-last"><span>✓ Conformidade com o exigido</span><span class="summary-value">92%</span></div>
         <div class="summary-status">
           <span class="status-pill status-ok">Status: pronto para envio</span>
         </div>
       </div>
 
       <div class="btn-stack">
-        <button id="btn-baixar-pdf" class="btn-primary">Baixar PDF do relatório</button>
-        <button class="btn-secondary btn-fake-action">Enviar para RH por e-mail</button>
+        <button id="btn-baixar-pdf" class="btn-primary">↓ Baixar PDF do relatório</button>
+        <button class="btn-secondary btn-fake-action">→ Enviar para RH por e-mail</button>
       </div>
 
       <p class="helper-text">NR-01, Portaria MTP nº 423/2021. Relatório gerado automaticamente a partir dos check-ins do período.</p>

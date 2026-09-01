@@ -47,7 +47,9 @@ $(function () {
   $("#mood-chips").on("click", ".mood-chip", function () {
     $(".mood-chip").removeClass("selected");
     $(this).addClass("selected");
-    $("#btn-registrar-checkin").prop("disabled", false).text("Registrar");
+    var modo = $("#btn-registrar-checkin").data("modo") || "entrada";
+    var rotulo = modo === "entrada" ? "Registrar chegada" : "Registrar saída";
+    $("#btn-registrar-checkin").prop("disabled", false).text(rotulo);
   });
 
   // ---- Botão "Registrar chegada/saída" na home do funcionário ----
