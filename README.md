@@ -10,11 +10,16 @@ orçamento e desenvolvimento completo — combinado na reunião de alinhamento d
 
 - É um protótipo **não funcional**: nenhuma tela salva dado em banco nenhum, não há login real,
   não gera PDF nem envia e-mail de verdade. Serve só pra clicar e visualizar o comportamento.
-- Cobre os dois perfis de acesso (funcionário e RH/líder), o check-in duplo (entrada e saída),
-  o painel de risco, o detalhe por equipe, o relatório NR-01 e a agenda de consultoria recorrente.
-- A tela do RH/líder está representada dentro do mesmo formato de app mobile por simplicidade de
-  protótipo — se o painel final vai ser mobile ou acessado pelo navegador num computador ainda é
-  uma decisão em aberto com a cliente.
+- **É um site de verdade**, não um app nativo — só que otimizado exclusivamente para largura de
+  celular (não tem moldura de hardware simulada; em telas largas o conteúdo fica centralizado
+  numa coluna do tamanho de um celular, como qualquer site mobile-only se comporta no desktop).
+- Cobre os três perfis de acesso: **funcionário** (check-in duplo, entrada e saída),
+  **RH/líder** (cadastro da empresa, colaboradores, painel de risco, relatório NR-01, agenda de
+  consultoria) e **administradora** (visão da Camila sobre todas as empresas clientes,
+  todos os usuários e a agenda geral de palestras).
+- A tela do RH/líder está representada no mesmo formato mobile por simplicidade de protótipo —
+  se o painel final vai ser mobile ou acessado pelo navegador num computador ainda é uma decisão
+  em aberto com a cliente.
 - **Paleta intencionalmente monocromática** (branco, cinzas, preto) e sem tipografia definida —
   isso não é a identidade visual final, é pra não misturar validação de fluxo com decisão de
   marca/cor.
@@ -23,16 +28,16 @@ orçamento e desenvolvimento completo — combinado na reunião de alinhamento d
 
 | Perfil | Telas |
 |---|---|
-| Login | Seleção de acesso (funcionário / RH-líder) |
+| Login | Seleção de acesso (funcionário / RH-líder / administradora) |
 | Funcionário | Início (status dos check-ins do dia), Check-in (entrada e saída), Confirmação |
-| RH / Líder | Cadastro da empresa, Painel de risco, Detalhe por equipe, Relatório NR-01, Agenda de consultoria |
+| RH / Líder | Cadastro da empresa, Colaboradores, Painel de risco, Detalhe por equipe, Relatório NR-01, Agenda de consultoria |
+| Administradora (Camila) | Visão geral (métricas entre empresas), Empresas clientes, Usuários, Agenda geral |
 
 ## Tecnologia
 
 HTML + [Tailwind CSS](https://tailwindcss.com) (via CDN) + [jQuery](https://jquery.com) — tudo em
-um único `index.html` com as telas como seções alternadas por JS, dentro de uma moldura de
-celular. Sem build step, sem dependência de servidor — abre direto no navegador ou publica no
-GitHub Pages.
+um único `index.html` com as telas como seções alternadas por JS. Sem build step, sem dependência
+de servidor — abre direto no navegador ou publica no GitHub Pages.
 
 ## Rodando localmente
 

@@ -10,8 +10,9 @@ $(function () {
 
   function mostrarTela(id) {
     $(".screen").removeClass("active");
-    $("#screen-" + id).addClass("active");
-    $("#phone-screen").scrollTop(0);
+    var $tela = $("#screen-" + id).addClass("active");
+    var $body = $tela.find(".screen-body");
+    if ($body.length) $body.scrollTop(0);
     $("#demo-jump").val(id);
   }
 
@@ -19,12 +20,21 @@ $(function () {
     var $t = $("#toast").text(msg);
     $t.addClass("show");
     clearTimeout(toast._t);
-    toast._t = setTimeout(function () { $t.removeClass("show"); }, 2200);
+    toast._t = setTimeout(function () { $t.removeClass("show"); }, 2400);
   }
 
-  // Navegação por botões com data-goto
+  // Navegação por botões com data-goto (algumas linhas também carregam data-empresa,
+  // usado só pra personalizar o cabeçalho do painel ao entrar vindo da administração)
   $(document).on("click", "[data-goto]", function () {
+    var empresa = $(this).data("empresa");
+    if (empresa) $("#painel-empresa-nome").text(empresa);
     mostrarTela($(this).data("goto"));
+  });
+
+  // Botões que não têm ação real neste protótipo (envio de e-mail, reagendamento,
+  // cadastro de empresa, convite de colaborador etc.) — todos avisam via toast.
+  $(document).on("click", ".btn-fake-action", function () {
+    toast("Esta ação não está conectada neste protótipo — é só para validar o fluxo.");
   });
 
   // Atalho de demonstração
@@ -43,7 +53,6 @@ $(function () {
   // ---- Botão "Registrar chegada/saída" na home do funcionário ----
   $("#btn-fazer-checkin").on("click", function () {
     var modo = estado.checkin.entrada ? "saida" : "entrada";
-    $(this).data("checkin-mode", modo);
 
     if (modo === "entrada") {
       $("#checkin-titulo").text("Como você está chegando hoje?");
@@ -82,9 +91,9 @@ $(function () {
     if (estado.checkin.entrada && estado.checkin.saida) {
       $btn.prop("disabled", true).text("Check-ins de hoje concluídos");
     } else if (estado.checkin.entrada) {
-      $btn.text("Registrar saída");
+      $btn.prop("disabled", false).text("Registrar saída");
     } else {
-      $btn.text("Registrar chegada");
+      $btn.prop("disabled", false).text("Registrar chegada");
     }
   }
 
@@ -94,12 +103,12 @@ $(function () {
   function montarHistorico() {
     var $wrap = $("#func-historico").empty();
     var dias = ["S", "T", "Q", "Q", "S", "S", "D"];
-    var alturaMaxPx = 48;
+    var alturaMaxPx = 40;
     estado.historico.forEach(function (v, i) {
       var alturaPx = Math.max(6, (v / 5) * alturaMaxPx);
       var atual = i === estado.historico.length - 1;
       $wrap.append(
-        $("<div>").addClass("flex-1 flex flex-col items-end justify-end gap-1 h-full")
+        $("<div>").addClass("flex-1 flex flex-col items-center justify-end gap-1 h-full")
           .append($("<div>").addClass("bar w-full" + (atual ? " bar-current" : "")).css("height", alturaPx + "px"))
           .append($("<span>").addClass("text-[9px] text-gray-400").text(dias[i]))
       );
@@ -107,33 +116,35 @@ $(function () {
   }
 
   // ---- Porte da empresa (onboarding RH) ----
-  $("#porte-empresa").on("click", ".porte-chip", function () {
-    $(".porte-chip").removeClass("selected");
+  $("#porte-empresa").on("click", ".option-chip", function () {
+    $("#porte-empresa .option-chip").removeClass("selected");
+    $(this).addClass("selected");
+  });
+
+  // ---- Plano contratado (onboarding RH) ----
+  $("#plano-empresa").on("click", ".option-chip", function () {
+    $("#plano-empresa .option-chip").removeClass("selected");
+    $(this).addClass("selected");
+  });
+
+  // ---- Filtro de usuários (admin) — só visual, a lista não muda neste protótipo ----
+  $("#filtro-usuarios").on("click", ".option-chip", function () {
+    $("#filtro-usuarios .option-chip").removeClass("selected");
     $(this).addClass("selected");
   });
 
   // ---- Detalhe da equipe ----
-  $(document).on("click", ".equipe-row", function () {
+  $(document).on("click", ".equipe-row, [data-equipe]", function () {
     var nome = $(this).data("equipe");
     var risco = $(this).data("risco");
+    if (!nome) return;
     $("#equipe-nome").text(nome);
     $("#equipe-risco").text(risco);
-    mostrarTela("rh-equipe");
   });
 
   // ---- Baixar PDF (fake) ----
   $("#btn-baixar-pdf").on("click", function () {
     toast("Neste protótipo o PDF não é gerado de verdade — na versão final, baixa aqui.");
-  });
-
-  // ---- Enviar relatório por e-mail (fake) ----
-  $("#screen-rh-relatorio .btn-secondary").on("click", function () {
-    toast("Neste protótipo o e-mail não é enviado de verdade — na versão final, vai direto pro responsável de RH.");
-  });
-
-  // ---- Solicitar reagendamento (fake) ----
-  $("#screen-rh-agenda .btn-secondary").on("click", function () {
-    toast("Neste protótipo não há agenda real — na versão final, isso abre as opções de data com a Camila.");
   });
 
   // ---- Data de hoje nos textos ----

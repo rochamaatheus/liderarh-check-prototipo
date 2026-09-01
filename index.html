@@ -2,25 +2,25 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LIDERARH Check — Protótipo navegável</title>
 <meta name="robots" content="noindex, nofollow">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body>
 
-<!-- Aviso fixo do que é este material -->
-<div class="bg-black text-white text-xs sm:text-sm text-center py-2 px-4">
+<!-- Aviso do que é este material — full-bleed, deixa claro que não é a UI do produto -->
+<div class="meta-bar meta-bar-dark">
   Protótipo navegável — telas não funcionais, sem conexão com banco de dados. Serve para validar o fluxo antes do desenvolvimento.
 </div>
 
-<!-- Atalhos de demonstração (não faz parte do produto, é só pra navegar rápido durante a apresentação) -->
-<div class="max-w-md mx-auto mt-3 mb-1 px-4">
-  <div class="border border-dashed border-gray-400 rounded-lg px-3 py-2 flex items-center gap-2 text-xs text-gray-500 bg-white">
+<!-- Atalhos de demonstração — não faz parte do produto, só ajuda a navegar durante a apresentação -->
+<div class="meta-bar meta-bar-light">
+  <div class="meta-bar-inner">
     <span class="whitespace-nowrap">Atalhos (demo):</span>
-    <select id="demo-jump" class="flex-1 border border-gray-300 rounded px-2 py-1 text-xs bg-white">
+    <select id="demo-jump">
       <option value="">Ir para tela...</option>
       <optgroup label="Início">
         <option value="login">Login</option>
@@ -31,341 +31,672 @@
       </optgroup>
       <optgroup label="RH / Líder">
         <option value="rh-onboarding">Cadastro da empresa</option>
+        <option value="rh-colaboradores">Colaboradores da empresa</option>
         <option value="rh-painel">Painel do líder</option>
         <option value="rh-equipe">Detalhe de equipe</option>
         <option value="rh-relatorio">Relatório NR-01</option>
         <option value="rh-agenda">Agenda de consultoria</option>
       </optgroup>
+      <optgroup label="Administração (Camila)">
+        <option value="admin-visao-geral">Visão geral</option>
+        <option value="admin-empresas">Empresas clientes</option>
+        <option value="admin-usuarios">Usuários</option>
+        <option value="admin-agenda">Agenda geral</option>
+      </optgroup>
     </select>
   </div>
 </div>
 
-<!-- Moldura de celular -->
-<div class="max-w-md mx-auto px-4 pb-10">
-  <div class="phone mx-auto">
-    <div class="phone-notch"></div>
-    <div class="phone-screen" id="phone-screen">
+<!-- Site real, otimizado só para largura de celular — sem moldura de hardware -->
+<main class="shell" id="shell">
 
-      <!-- ===================== LOGIN ===================== -->
-      <section class="screen" id="screen-login">
-        <div class="p-6 flex flex-col min-h-full justify-center">
-          <div class="text-center mb-10">
-            <div class="mx-auto mb-4 h-14 w-14 rounded-2xl bg-black flex items-center justify-center text-white font-bold text-lg">LC</div>
-            <h1 class="text-xl font-semibold tracking-tight">LIDERARH Check</h1>
-            <p class="text-sm text-gray-500 mt-1">Check-in emocional e gestão de riscos psicossociais</p>
-          </div>
+  <!-- ===================== LOGIN ===================== -->
+  <section class="screen" id="screen-login">
+    <div class="screen-body screen-body-center">
+      <div class="text-center mb-10">
+        <div class="brand-mark">LC</div>
+        <h1 class="text-xl font-semibold tracking-tight">LIDERARH Check</h1>
+        <p class="text-sm text-gray-500 mt-1">Check-in emocional e gestão de riscos psicossociais</p>
+      </div>
 
-          <div class="space-y-3">
-            <div>
-              <label class="text-xs text-gray-500">E-mail</label>
-              <input type="text" placeholder="voce@empresa.com" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-gray-50" disabled>
-            </div>
-            <div>
-              <label class="text-xs text-gray-500">Senha</label>
-              <input type="password" placeholder="••••••••" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-gray-50" disabled>
-            </div>
-          </div>
-
-          <p class="text-[11px] text-gray-400 mt-2">Campos desativados neste protótipo — escolha um dos acessos abaixo para navegar.</p>
-
-          <div class="mt-6 space-y-2">
-            <button class="btn-primary w-full" data-goto="func-home">Entrar como Funcionário</button>
-            <button class="btn-secondary w-full" data-goto="rh-onboarding">Entrar como Líder / RH</button>
-          </div>
+      <div class="field-group">
+        <div class="field">
+          <label class="field-label" for="input-email">E-mail</label>
+          <input id="input-email" type="text" placeholder="voce@empresa.com" class="field-input" disabled>
         </div>
-      </section>
-
-      <!-- ===================== FUNCIONÁRIO: HOME ===================== -->
-      <section class="screen" id="screen-func-home">
-        <div class="app-header">
-          <div>
-            <p class="text-[11px] text-gray-400">Olá,</p>
-            <p class="font-semibold text-sm">Maria Oliveira</p>
-          </div>
-          <button class="text-xs text-gray-400" data-goto="login">Sair</button>
+        <div class="field">
+          <label class="field-label" for="input-senha">Senha</label>
+          <input id="input-senha" type="password" placeholder="••••••••" class="field-input" disabled>
         </div>
+      </div>
 
-        <div class="p-4 space-y-4">
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs text-gray-500 mb-3" id="func-data-hoje">Hoje</p>
+      <p class="field-hint">Campos desativados neste protótipo — escolha um dos acessos abaixo para navegar.</p>
 
-            <div class="flex items-center justify-between py-2 border-b border-gray-100">
-              <div>
-                <p class="text-sm font-medium">Check-in de chegada</p>
-                <p class="text-[11px] text-gray-400">Como você chegou hoje</p>
-              </div>
-              <span id="status-entrada" class="status-pill status-pending">Pendente</span>
-            </div>
-
-            <div class="flex items-center justify-between py-2">
-              <div>
-                <p class="text-sm font-medium">Check-in de saída</p>
-                <p class="text-[11px] text-gray-400">Como foi o seu dia</p>
-              </div>
-              <span id="status-saida" class="status-pill status-pending">Pendente</span>
-            </div>
-          </div>
-
-          <button id="btn-fazer-checkin" class="btn-primary w-full" data-checkin-mode="entrada">Registrar chegada</button>
-
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs font-medium text-gray-500 mb-3">Últimos 7 dias</p>
-            <div class="flex items-end gap-2 h-16" id="func-historico">
-              <!-- barras geradas via JS -->
-            </div>
-          </div>
-
-          <p class="text-[11px] text-gray-400 text-center px-4">Suas respostas individuais nunca são mostradas para o seu líder — só dados agregados por equipe.</p>
-        </div>
-
-        <div class="bottom-nav">
-          <button class="bottom-nav-item active">Início</button>
-        </div>
-      </section>
-
-      <!-- ===================== FUNCIONÁRIO: CHECK-IN ===================== -->
-      <section class="screen" id="screen-func-checkin">
-        <div class="app-header">
-          <button class="text-xs text-gray-400" data-goto="func-home">&larr; Voltar</button>
-          <span class="font-semibold text-sm">LIDERARH Check</span>
-          <span class="w-10"></span>
-        </div>
-
-        <div class="p-6">
-          <p class="text-[11px] text-gray-400 mb-1" id="checkin-data">22 de outubro de 2025 · Quarta-feira</p>
-          <h2 class="text-lg font-semibold mb-6" id="checkin-titulo">Como você está chegando hoje?</h2>
-
-          <div class="grid grid-cols-5 gap-2 mb-6" id="mood-chips">
-            <button class="mood-chip" data-mood="Feliz">
-              <span class="text-xl">🙂</span><span>Feliz</span>
-            </button>
-            <button class="mood-chip" data-mood="Neutro">
-              <span class="text-xl">😐</span><span>Neutro</span>
-            </button>
-            <button class="mood-chip" data-mood="Ansioso">
-              <span class="text-xl">😟</span><span>Ansioso</span>
-            </button>
-            <button class="mood-chip" data-mood="Cansado">
-              <span class="text-xl">😪</span><span>Cansado</span>
-            </button>
-            <button class="mood-chip" data-mood="Estressado">
-              <span class="text-xl">😣</span><span>Estressado</span>
-            </button>
-          </div>
-
-          <label class="text-xs text-gray-500">Observação (opcional)</label>
-          <textarea rows="3" placeholder="Quer comentar algo?" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-gray-50"></textarea>
-
-          <button id="btn-registrar-checkin" class="btn-primary w-full mt-6" disabled>Selecione uma opção</button>
-          <p class="text-[11px] text-gray-400 text-center mt-3">Leva menos de 10 segundos.</p>
-        </div>
-      </section>
-
-      <!-- ===================== FUNCIONÁRIO: SUCESSO ===================== -->
-      <section class="screen" id="screen-func-sucesso">
-        <div class="p-6 flex flex-col items-center justify-center min-h-full text-center">
-          <div class="h-14 w-14 rounded-full bg-black text-white flex items-center justify-center text-2xl mb-4">✓</div>
-          <h2 class="text-lg font-semibold" id="sucesso-titulo">Check-in registrado</h2>
-          <p class="text-sm text-gray-500 mt-2 max-w-[240px]" id="sucesso-texto">Obrigado por compartilhar como você está. Isso ajuda sua empresa a cuidar melhor do time.</p>
-          <button class="btn-primary mt-8 px-8" data-goto="func-home">Continuar</button>
-        </div>
-      </section>
-
-      <!-- ===================== RH: ONBOARDING DA EMPRESA ===================== -->
-      <section class="screen" id="screen-rh-onboarding">
-        <div class="app-header">
-          <span class="font-semibold text-sm">Cadastro da empresa</span>
-          <span class="text-[11px] text-gray-400">Passo 1/2</span>
-        </div>
-
-        <div class="p-6">
-          <label class="text-xs text-gray-500">Nome da empresa</label>
-          <input type="text" value="Empresa Exemplo Ltda" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-gray-50 mb-4">
-
-          <p class="text-sm font-medium mb-2">Quantos colaboradores a empresa possui?</p>
-          <div class="grid grid-cols-2 gap-2 mb-4" id="porte-empresa">
-            <button class="porte-chip">Até 9</button>
-            <button class="porte-chip">10 a 29</button>
-            <button class="porte-chip">30 a 99</button>
-            <button class="porte-chip selected">100 a 249</button>
-            <button class="porte-chip">250 a 499</button>
-            <button class="porte-chip">500+</button>
-          </div>
-
-          <label class="text-xs text-gray-500">Responsável pelo RH</label>
-          <input type="text" value="Joana Silva" class="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-gray-50">
-
-          <button class="btn-primary w-full mt-6" data-goto="rh-painel">Concluir cadastro</button>
-          <button class="text-xs text-gray-400 w-full text-center mt-3" data-goto="rh-painel">Já configurado? Ir direto para o painel</button>
-        </div>
-      </section>
-
-      <!-- ===================== RH: PAINEL DO LÍDER ===================== -->
-      <section class="screen" id="screen-rh-painel">
-        <div class="app-header">
-          <div>
-            <p class="text-[11px] text-gray-400">Painel do líder</p>
-            <p class="font-semibold text-sm">Empresa Exemplo Ltda</p>
-          </div>
-          <button class="text-xs text-gray-400" data-goto="login">Sair</button>
-        </div>
-
-        <div class="p-4 space-y-4">
-          <div class="border border-gray-200 rounded-xl p-4 bg-white text-center">
-            <p class="text-xs font-medium text-gray-500 mb-3">Indicadores de risco · Outubro 2025</p>
-            <div class="donut mx-auto" id="donut-risco">
-              <div class="donut-center">
-                <span class="text-lg font-semibold leading-none">87%</span>
-                <span class="text-[10px] text-gray-400">colaboradores ativos</span>
-              </div>
-            </div>
-            <div class="flex justify-center gap-4 mt-4 text-[11px]">
-              <span class="flex items-center gap-1"><i class="dot dot-light"></i>Baixo · 62%</span>
-              <span class="flex items-center gap-1"><i class="dot dot-mid"></i>Médio · 25%</span>
-              <span class="flex items-center gap-1"><i class="dot dot-dark"></i>Alto · 13%</span>
-            </div>
-          </div>
-
-          <div class="border border-gray-200 rounded-xl bg-white overflow-hidden">
-            <p class="text-xs font-medium text-gray-500 px-4 pt-4 pb-2">Equipes por nível de risco</p>
-            <button class="equipe-row" data-equipe="Vendas" data-risco="Baixo" data-nivel="light">
-              <span class="flex items-center gap-2"><i class="dot dot-light"></i>Vendas</span>
-              <span class="text-xs text-gray-400">Baixo · 12 pessoas &rsaquo;</span>
-            </button>
-            <button class="equipe-row" data-equipe="Operações" data-risco="Médio" data-nivel="mid">
-              <span class="flex items-center gap-2"><i class="dot dot-mid"></i>Operações</span>
-              <span class="text-xs text-gray-400">Médio · 8 pessoas &rsaquo;</span>
-            </button>
-            <button class="equipe-row border-b-0" data-equipe="Logística" data-risco="Alto" data-nivel="dark">
-              <span class="flex items-center gap-2"><i class="dot dot-dark"></i>Logística</span>
-              <span class="text-xs text-gray-400">Alto · 4 pessoas &rsaquo;</span>
-            </button>
-          </div>
-
-          <p class="text-[11px] text-gray-400 text-center px-4">Os números acima são agregados — nenhuma resposta individual é exibida para o líder.</p>
-        </div>
-
-        <div class="bottom-nav bottom-nav-4">
-          <button class="bottom-nav-item active" data-goto="rh-painel">Painel</button>
-          <button class="bottom-nav-item" data-goto="rh-relatorio">Relatório</button>
-          <button class="bottom-nav-item" data-goto="rh-agenda">Agenda</button>
-          <button class="bottom-nav-item" data-goto="rh-onboarding">Empresa</button>
-        </div>
-      </section>
-
-      <!-- ===================== RH: DETALHE DA EQUIPE ===================== -->
-      <section class="screen" id="screen-rh-equipe">
-        <div class="app-header">
-          <button class="text-xs text-gray-400" data-goto="rh-painel">&larr; Voltar</button>
-          <span class="font-semibold text-sm" id="equipe-nome">Equipe</span>
-          <span class="w-10"></span>
-        </div>
-
-        <div class="p-4 space-y-4">
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs text-gray-500">Nível de risco atual</p>
-            <p class="text-lg font-semibold mt-1" id="equipe-risco">Médio</p>
-          </div>
-
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs font-medium text-gray-500 mb-3">Tendência — últimas 4 semanas</p>
-            <div class="flex items-end gap-3 h-20">
-              <div class="bar" style="height:40%"></div>
-              <div class="bar" style="height:55%"></div>
-              <div class="bar" style="height:70%"></div>
-              <div class="bar bar-current" style="height:58%"></div>
-            </div>
-            <div class="flex justify-between text-[10px] text-gray-400 mt-2">
-              <span>Sem 1</span><span>Sem 2</span><span>Sem 3</span><span>Sem 4</span>
-            </div>
-          </div>
-
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs font-medium text-gray-500 mb-2">Principais observações (agregadas)</p>
-            <ul class="text-sm space-y-2 list-disc list-inside text-gray-700">
-              <li>Aumento de respostas "Cansado" às sextas-feiras</li>
-              <li>Comentários recorrentes sobre sobrecarga de demanda</li>
-            </ul>
-          </div>
-
-          <p class="text-[11px] text-gray-400 text-center px-4">Dado agregado por equipe, sem identificação de quem respondeu — mantém o anonimato do colaborador.</p>
-        </div>
-      </section>
-
-      <!-- ===================== RH: RELATÓRIO NR-01 ===================== -->
-      <section class="screen" id="screen-rh-relatorio">
-        <div class="app-header">
-          <span class="font-semibold text-sm">Relatório NR-01</span>
-          <span class="w-10"></span>
-        </div>
-
-        <div class="p-4 space-y-4">
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs text-gray-500">Período do relatório</p>
-            <p class="text-sm font-medium mt-1">01/10/2025 a 22/10/2025</p>
-          </div>
-
-          <div class="border border-gray-200 rounded-xl p-4 bg-white space-y-3">
-            <p class="text-xs font-medium text-gray-500">Resumo</p>
-            <div class="flex items-center justify-between text-sm"><span>Riscos psicossociais identificados</span><span class="font-medium">3</span></div>
-            <div class="flex items-center justify-between text-sm"><span>Ações preventivas cadastradas</span><span class="font-medium">5</span></div>
-            <div class="flex items-center justify-between text-sm"><span>Conformidade com o exigido</span><span class="font-medium">92%</span></div>
-            <div class="pt-2 border-t border-gray-100">
-              <span class="status-pill status-ok">Status: pronto para envio</span>
-            </div>
-          </div>
-
-          <button id="btn-baixar-pdf" class="btn-primary w-full">Baixar PDF do relatório</button>
-          <button class="btn-secondary w-full">Enviar para RH por e-mail</button>
-
-          <p class="text-[11px] text-gray-400 text-center px-4">NR-01 — Portaria MTP nº 423/2021. Relatório gerado automaticamente a partir dos check-ins do período.</p>
-        </div>
-
-        <div class="bottom-nav bottom-nav-4">
-          <button class="bottom-nav-item" data-goto="rh-painel">Painel</button>
-          <button class="bottom-nav-item active" data-goto="rh-relatorio">Relatório</button>
-          <button class="bottom-nav-item" data-goto="rh-agenda">Agenda</button>
-          <button class="bottom-nav-item" data-goto="rh-onboarding">Empresa</button>
-        </div>
-      </section>
-
-      <!-- ===================== RH: AGENDA DE CONSULTORIA ===================== -->
-      <section class="screen" id="screen-rh-agenda">
-        <div class="app-header">
-          <span class="font-semibold text-sm">Agenda de consultoria</span>
-          <span class="w-10"></span>
-        </div>
-
-        <div class="p-4 space-y-4">
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs text-gray-500">Próxima palestra / mentoria inclusa no plano</p>
-            <p class="text-sm font-medium mt-1">18 de novembro de 2025 · 14h</p>
-            <p class="text-xs text-gray-500 mt-1">Tema sugerido com base nos dados: <span class="text-gray-800 font-medium">sobrecarga de demanda na Logística</span></p>
-          </div>
-
-          <div class="border border-gray-200 rounded-xl p-4 bg-white">
-            <p class="text-xs font-medium text-gray-500 mb-2">Como funciona</p>
-            <p class="text-sm text-gray-700">A cada 45–60 dias, os dados agregados do período viram o roteiro de uma palestra ou mentoria presencial — sem precisar de um novo diagnóstico manual a cada visita.</p>
-          </div>
-
-          <button class="btn-secondary w-full">Solicitar reagendamento</button>
-        </div>
-
-        <div class="bottom-nav bottom-nav-4">
-          <button class="bottom-nav-item" data-goto="rh-painel">Painel</button>
-          <button class="bottom-nav-item" data-goto="rh-relatorio">Relatório</button>
-          <button class="bottom-nav-item active" data-goto="rh-agenda">Agenda</button>
-          <button class="bottom-nav-item" data-goto="rh-onboarding">Empresa</button>
-        </div>
-      </section>
-
+      <div class="btn-stack">
+        <button class="btn-primary" data-goto="func-home">Entrar como Funcionário</button>
+        <button class="btn-secondary" data-goto="rh-onboarding">Entrar como Líder / RH</button>
+        <button class="btn-secondary" data-goto="admin-visao-geral">Entrar como Administradora (Camila)</button>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <p class="text-center text-[11px] text-gray-400 mt-4">
-    LIDERARH Check — protótipo de fluxo, sem identidade visual definida.
-  </p>
-</div>
+  <!-- ===================== FUNCIONÁRIO: HOME ===================== -->
+  <section class="screen" id="screen-func-home">
+    <header class="screen-header">
+      <div>
+        <p class="screen-header-eyebrow">Olá,</p>
+        <p class="screen-header-title">Maria Oliveira</p>
+        <p class="screen-header-subtitle">Analista · Financeiro</p>
+      </div>
+      <button class="link-muted" data-goto="login">Sair</button>
+    </header>
+
+    <div class="screen-body">
+      <div class="card">
+        <p class="card-eyebrow" id="func-data-hoje">Hoje</p>
+
+        <div class="list-row">
+          <div>
+            <p class="list-row-title">Check-in de chegada</p>
+            <p class="list-row-subtitle">Como você chegou hoje</p>
+          </div>
+          <span id="status-entrada" class="status-pill status-pending">Pendente</span>
+        </div>
+
+        <div class="list-row list-row-last">
+          <div>
+            <p class="list-row-title">Check-in de saída</p>
+            <p class="list-row-subtitle">Como foi o seu dia</p>
+          </div>
+          <span id="status-saida" class="status-pill status-pending">Pendente</span>
+        </div>
+      </div>
+
+      <button id="btn-fazer-checkin" class="btn-primary" data-checkin-mode="entrada">Registrar chegada</button>
+
+      <div class="card">
+        <p class="card-eyebrow">Últimos 7 dias</p>
+        <div class="history-bars" id="func-historico">
+          <!-- barras geradas via JS -->
+        </div>
+      </div>
+
+      <p class="helper-text">Suas respostas individuais nunca são mostradas para o seu líder — só dados agregados por equipe.</p>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="bottom-nav-item active">Início</button>
+    </nav>
+  </section>
+
+  <!-- ===================== FUNCIONÁRIO: CHECK-IN ===================== -->
+  <section class="screen" id="screen-func-checkin">
+    <header class="screen-header">
+      <button class="link-muted" data-goto="func-home">&larr; Voltar</button>
+      <span class="screen-header-title-center">LIDERARH Check</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <p class="card-eyebrow" id="checkin-data">22 de outubro de 2025 · Quarta-feira</p>
+      <h2 class="section-title" id="checkin-titulo">Como você está chegando hoje?</h2>
+
+      <div class="mood-grid" id="mood-chips">
+        <button class="mood-chip" data-mood="Feliz">
+          <span class="mood-chip-emoji">🙂</span><span>Feliz</span>
+        </button>
+        <button class="mood-chip" data-mood="Neutro">
+          <span class="mood-chip-emoji">😐</span><span>Neutro</span>
+        </button>
+        <button class="mood-chip" data-mood="Ansioso">
+          <span class="mood-chip-emoji">😟</span><span>Ansioso</span>
+        </button>
+        <button class="mood-chip" data-mood="Cansado">
+          <span class="mood-chip-emoji">😪</span><span>Cansado</span>
+        </button>
+        <button class="mood-chip" data-mood="Estressado">
+          <span class="mood-chip-emoji">😣</span><span>Estressado</span>
+        </button>
+      </div>
+
+      <div class="field mt-6">
+        <label class="field-label" for="input-observacao">Observação (opcional)</label>
+        <textarea id="input-observacao" rows="3" placeholder="Quer comentar algo?" class="field-input"></textarea>
+      </div>
+
+      <button id="btn-registrar-checkin" class="btn-primary mt-6" disabled>Selecione uma opção</button>
+      <p class="field-hint text-center">Leva menos de 10 segundos.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FUNCIONÁRIO: SUCESSO ===================== -->
+  <section class="screen" id="screen-func-sucesso">
+    <div class="screen-body screen-body-center text-center">
+      <div class="success-badge">✓</div>
+      <h2 class="section-title" id="sucesso-titulo">Check-in registrado</h2>
+      <p class="text-sm text-gray-500 mt-2 max-w-[260px] mx-auto" id="sucesso-texto">Obrigado por compartilhar como você está. Isso ajuda sua empresa a cuidar melhor do time.</p>
+      <button class="btn-primary btn-inline mt-8" data-goto="func-home">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ===================== RH: ONBOARDING DA EMPRESA ===================== -->
+  <section class="screen" id="screen-rh-onboarding">
+    <header class="screen-header">
+      <span class="screen-header-title">Cadastro da empresa</span>
+      <span class="screen-header-step">Passo 1/2</span>
+    </header>
+
+    <div class="screen-body">
+      <div class="field">
+        <label class="field-label" for="input-empresa">Nome da empresa</label>
+        <input id="input-empresa" type="text" value="Empresa Exemplo Ltda" class="field-input">
+      </div>
+
+      <div class="field mt-5">
+        <p class="field-label">Quantos colaboradores a empresa possui?</p>
+        <div class="chip-grid" id="porte-empresa">
+          <button class="option-chip">Até 9</button>
+          <button class="option-chip">10 a 29</button>
+          <button class="option-chip">30 a 99</button>
+          <button class="option-chip selected">100 a 249</button>
+          <button class="option-chip">250 a 499</button>
+          <button class="option-chip">500+</button>
+        </div>
+      </div>
+
+      <div class="field mt-5">
+        <label class="field-label" for="input-responsavel">Responsável pelo RH</label>
+        <input id="input-responsavel" type="text" value="Joana Silva" class="field-input">
+      </div>
+
+      <div class="field mt-5">
+        <p class="field-label">Plano</p>
+        <div class="chip-grid chip-grid-3" id="plano-empresa">
+          <button class="option-chip option-chip-plan" data-plano="Pequena">
+            <span class="option-chip-plan-name">Pequena</span>
+            <span class="option-chip-plan-price">R$ 297/mês</span>
+          </button>
+          <button class="option-chip option-chip-plan selected" data-plano="Média">
+            <span class="option-chip-plan-name">Média</span>
+            <span class="option-chip-plan-price">R$ 697/mês</span>
+          </button>
+          <button class="option-chip option-chip-plan" data-plano="Grande">
+            <span class="option-chip-plan-name">Grande</span>
+            <span class="option-chip-plan-price">R$ 1.497/mês</span>
+          </button>
+        </div>
+        <p class="field-hint">Faixa de referência — o valor final é definido na proposta comercial.</p>
+      </div>
+
+      <label class="checkbox-row mt-5">
+        <input type="checkbox" checked disabled>
+        <span>Li e aceito os termos de uso e a política de privacidade. Por envolver dado de saúde, o tratamento segue cuidado redobrado de anonimato.</span>
+      </label>
+
+      <button class="btn-primary mt-6" data-goto="rh-painel">Concluir cadastro</button>
+      <button class="link-muted btn-inline-link" data-goto="rh-colaboradores">Ver colaboradores cadastrados</button>
+      <button class="link-muted btn-inline-link" data-goto="rh-painel">Já configurado? Ir direto para o painel</button>
+    </div>
+  </section>
+
+  <!-- ===================== RH: COLABORADORES DA EMPRESA ===================== -->
+  <section class="screen" id="screen-rh-colaboradores">
+    <header class="screen-header">
+      <button class="link-muted" data-goto="rh-onboarding">&larr; Voltar</button>
+      <span class="screen-header-title-center">Colaboradores</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="field">
+        <input type="text" placeholder="Buscar colaborador..." class="field-input" disabled>
+      </div>
+
+      <div class="card card-flush">
+        <button class="equipe-row">
+          <span class="equipe-row-label">
+            <span class="user-avatar">MO</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Maria Oliveira</span>
+              <span class="block text-xs text-gray-400">Analista · Financeiro</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativo</span>
+        </button>
+        <button class="equipe-row">
+          <span class="equipe-row-label">
+            <span class="user-avatar">JP</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">João Pedro</span>
+              <span class="block text-xs text-gray-400">Técnico · Operações</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativo</span>
+        </button>
+        <button class="equipe-row equipe-row-last">
+          <span class="equipe-row-label">
+            <span class="user-avatar">AS</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Ana Souza</span>
+              <span class="block text-xs text-gray-400">Assistente · Vendas</span>
+            </span>
+          </span>
+          <span class="status-pill status-pending">Convite pendente</span>
+        </button>
+      </div>
+
+      <button class="btn-primary btn-fake-action">Convidar colaborador</button>
+      <p class="helper-text">O colaborador só vê o próprio check-in — nunca os dados de outros colegas.</p>
+    </div>
+  </section>
+
+  <!-- ===================== RH: PAINEL DO LÍDER ===================== -->
+  <section class="screen" id="screen-rh-painel">
+    <header class="screen-header">
+      <div>
+        <p class="screen-header-eyebrow">Painel do líder</p>
+        <p class="screen-header-title" id="painel-empresa-nome">Empresa Exemplo Ltda</p>
+      </div>
+      <button class="link-muted" data-goto="login">Sair</button>
+    </header>
+
+    <div class="screen-body">
+      <div class="card text-center">
+        <p class="card-eyebrow">Risco psicossocial · NR-01 · Outubro 2025</p>
+        <div class="donut" id="donut-risco">
+          <div class="donut-center">
+            <span class="donut-center-value">87%</span>
+            <span class="donut-center-label">colaboradores ativos</span>
+          </div>
+        </div>
+        <div class="legend-row">
+          <span class="legend-item"><i class="dot dot-light"></i>Baixo · 62%</span>
+          <span class="legend-item"><i class="dot dot-mid"></i>Médio · 25%</span>
+          <span class="legend-item"><i class="dot dot-dark"></i>Alto · 13%</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <p class="card-eyebrow mb-0">Risco de EPI (complementar)</p>
+          <span class="text-sm font-semibold">78%</span>
+        </div>
+        <div class="progress-track mt-2">
+          <div class="progress-fill" style="width:78%"></div>
+        </div>
+        <p class="field-hint mt-2">Referente à NR-06 (equipamento de proteção), mapeado à parte do risco psicossocial da NR-01.</p>
+      </div>
+
+      <div class="alert-card">
+        <p class="alert-card-title">⚠ Logística está em risco alto</p>
+        <p class="alert-card-text">Recomendado agendar uma ação preventiva ou antecipar a próxima palestra com essa equipe.</p>
+        <button class="link-on-dark" data-goto="rh-equipe" data-equipe="Logística" data-risco="Alto">Ver equipe &rsaquo;</button>
+      </div>
+
+      <div class="card card-flush">
+        <p class="card-eyebrow card-eyebrow-padded">Equipes por nível de risco</p>
+        <button class="equipe-row" data-equipe="Vendas" data-risco="Baixo">
+          <span class="equipe-row-label"><i class="dot dot-light"></i>Vendas</span>
+          <span class="equipe-row-value">Baixo · 12 pessoas &rsaquo;</span>
+        </button>
+        <button class="equipe-row" data-equipe="Operações" data-risco="Médio">
+          <span class="equipe-row-label"><i class="dot dot-mid"></i>Operações</span>
+          <span class="equipe-row-value">Médio · 8 pessoas &rsaquo;</span>
+        </button>
+        <button class="equipe-row equipe-row-last" data-equipe="Logística" data-risco="Alto">
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Logística</span>
+          <span class="equipe-row-value">Alto · 4 pessoas &rsaquo;</span>
+        </button>
+      </div>
+
+      <p class="helper-text">Os números acima são agregados — nenhuma resposta individual é exibida para o líder.</p>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item active" data-goto="rh-painel">Painel</button>
+      <button class="bottom-nav-item" data-goto="rh-relatorio">Relatório</button>
+      <button class="bottom-nav-item" data-goto="rh-agenda">Agenda</button>
+      <button class="bottom-nav-item" data-goto="rh-onboarding">Empresa</button>
+    </nav>
+  </section>
+
+  <!-- ===================== RH: DETALHE DA EQUIPE ===================== -->
+  <section class="screen" id="screen-rh-equipe">
+    <header class="screen-header">
+      <button class="link-muted" data-goto="rh-painel">&larr; Voltar</button>
+      <span class="screen-header-title-center" id="equipe-nome">Equipe</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="card">
+        <p class="card-eyebrow">Nível de risco atual</p>
+        <p class="text-lg font-semibold" id="equipe-risco">Médio</p>
+      </div>
+
+      <div class="card">
+        <p class="card-eyebrow">Tendência — últimas 4 semanas</p>
+        <div class="trend-bars">
+          <div class="bar" style="height:40%"></div>
+          <div class="bar" style="height:55%"></div>
+          <div class="bar" style="height:70%"></div>
+          <div class="bar bar-current" style="height:58%"></div>
+        </div>
+        <div class="trend-labels">
+          <span>Sem 1</span><span>Sem 2</span><span>Sem 3</span><span>Sem 4</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="card-eyebrow">Principais observações (agregadas)</p>
+        <ul class="bullet-list">
+          <li>Aumento de respostas "Cansado" às sextas-feiras</li>
+          <li>Comentários recorrentes sobre sobrecarga de demanda</li>
+        </ul>
+      </div>
+
+      <p class="helper-text">Dado agregado por equipe, sem identificação de quem respondeu — mantém o anonimato do colaborador.</p>
+    </div>
+  </section>
+
+  <!-- ===================== RH: RELATÓRIO NR-01 ===================== -->
+  <section class="screen" id="screen-rh-relatorio">
+    <header class="screen-header">
+      <span class="screen-header-title-center">Relatório NR-01</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="card">
+        <p class="card-eyebrow">Período do relatório</p>
+        <p class="text-sm font-medium">01/10/2025 a 22/10/2025</p>
+      </div>
+
+      <div class="card">
+        <p class="card-eyebrow">Resumo</p>
+        <div class="summary-row"><span>Riscos psicossociais identificados</span><span class="summary-value">3</span></div>
+        <div class="summary-row"><span>Ações preventivas cadastradas</span><span class="summary-value">5</span></div>
+        <div class="summary-row summary-row-last"><span>Conformidade com o exigido</span><span class="summary-value">92%</span></div>
+        <div class="summary-status">
+          <span class="status-pill status-ok">Status: pronto para envio</span>
+        </div>
+      </div>
+
+      <div class="btn-stack">
+        <button id="btn-baixar-pdf" class="btn-primary">Baixar PDF do relatório</button>
+        <button class="btn-secondary btn-fake-action">Enviar para RH por e-mail</button>
+      </div>
+
+      <p class="helper-text">NR-01 — Portaria MTP nº 423/2021. Relatório gerado automaticamente a partir dos check-ins do período.</p>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item" data-goto="rh-painel">Painel</button>
+      <button class="bottom-nav-item active" data-goto="rh-relatorio">Relatório</button>
+      <button class="bottom-nav-item" data-goto="rh-agenda">Agenda</button>
+      <button class="bottom-nav-item" data-goto="rh-onboarding">Empresa</button>
+    </nav>
+  </section>
+
+  <!-- ===================== RH: AGENDA DE CONSULTORIA ===================== -->
+  <section class="screen" id="screen-rh-agenda">
+    <header class="screen-header">
+      <span class="screen-header-title-center">Agenda de consultoria</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="card">
+        <p class="card-eyebrow">Próxima palestra / mentoria inclusa no plano</p>
+        <p class="text-sm font-medium">18 de novembro de 2025 · 14h</p>
+        <p class="text-xs text-gray-500 mt-1">Tema sugerido com base nos dados: <span class="text-gray-800 font-medium">sobrecarga de demanda na Logística</span></p>
+      </div>
+
+      <div class="card">
+        <p class="card-eyebrow">Como funciona</p>
+        <p class="text-sm text-gray-700 leading-relaxed">A cada 45–60 dias, os dados agregados do período viram o roteiro de uma palestra ou mentoria presencial — sem precisar de um novo diagnóstico manual a cada visita.</p>
+      </div>
+
+      <button class="btn-secondary btn-fake-action">Solicitar reagendamento</button>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item" data-goto="rh-painel">Painel</button>
+      <button class="bottom-nav-item" data-goto="rh-relatorio">Relatório</button>
+      <button class="bottom-nav-item active" data-goto="rh-agenda">Agenda</button>
+      <button class="bottom-nav-item" data-goto="rh-onboarding">Empresa</button>
+    </nav>
+  </section>
+
+  <!-- ===================== ADMIN (CAMILA): VISÃO GERAL ===================== -->
+  <section class="screen" id="screen-admin-visao-geral">
+    <header class="screen-header">
+      <div>
+        <p class="screen-header-eyebrow">Administração</p>
+        <p class="screen-header-title">Camila Haas</p>
+      </div>
+      <button class="link-muted" data-goto="login">Sair</button>
+    </header>
+
+    <div class="screen-body">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <p class="stat-card-value">12</p>
+          <p class="stat-card-label">Empresas ativas</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-card-value">R$ 8.940</p>
+          <p class="stat-card-label">Receita recorrente estimada / mês</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-card-value">1.240</p>
+          <p class="stat-card-label">Colaboradores atendidos</p>
+        </div>
+        <div class="stat-card">
+          <p class="stat-card-value">812</p>
+          <p class="stat-card-label">Check-ins hoje</p>
+        </div>
+      </div>
+
+      <div class="card card-flush">
+        <p class="card-eyebrow card-eyebrow-padded">Alertas de risco alto entre empresas</p>
+        <button class="equipe-row" data-goto="rh-painel" data-empresa="Empresa Exemplo Ltda">
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Empresa Exemplo Ltda — Logística</span>
+          <span class="equipe-row-value">Alto &rsaquo;</span>
+        </button>
+        <button class="equipe-row" data-goto="rh-painel" data-empresa="Metaltech Joinville Ltda">
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Metaltech Joinville — Produção</span>
+          <span class="equipe-row-value">Alto &rsaquo;</span>
+        </button>
+        <button class="equipe-row equipe-row-last" data-goto="rh-painel" data-empresa="Comércio Araquari ME">
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Comércio Araquari — Atendimento</span>
+          <span class="equipe-row-value">Alto &rsaquo;</span>
+        </button>
+      </div>
+
+      <p class="helper-text">Visão consolidada entre todas as empresas clientes — cada empresa só enxerga os próprios dados dentro do painel dela.</p>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item active" data-goto="admin-visao-geral">Visão geral</button>
+      <button class="bottom-nav-item" data-goto="admin-empresas">Empresas</button>
+      <button class="bottom-nav-item" data-goto="admin-usuarios">Usuários</button>
+      <button class="bottom-nav-item" data-goto="admin-agenda">Agenda</button>
+    </nav>
+  </section>
+
+  <!-- ===================== ADMIN (CAMILA): EMPRESAS CLIENTES ===================== -->
+  <section class="screen" id="screen-admin-empresas">
+    <header class="screen-header">
+      <span class="screen-header-title-center">Empresas clientes</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="field">
+        <input type="text" placeholder="Buscar empresa..." class="field-input" disabled>
+      </div>
+
+      <div class="card card-flush">
+        <button class="equipe-row" data-goto="rh-painel" data-empresa="Empresa Exemplo Ltda">
+          <span class="equipe-row-label">
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Empresa Exemplo Ltda</span>
+              <span class="block text-xs text-gray-400">Média · 120 colaboradores</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativa</span>
+        </button>
+        <button class="equipe-row" data-goto="rh-painel" data-empresa="Metaltech Joinville Ltda">
+          <span class="equipe-row-label">
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Metaltech Joinville Ltda</span>
+              <span class="block text-xs text-gray-400">Grande · 310 colaboradores</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativa</span>
+        </button>
+        <button class="equipe-row" data-goto="rh-painel" data-empresa="Comércio Araquari ME">
+          <span class="equipe-row-label">
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Comércio Araquari ME</span>
+              <span class="block text-xs text-gray-400">Pequena · 18 colaboradores</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativa</span>
+        </button>
+        <button class="equipe-row equipe-row-last" data-goto="rh-painel" data-empresa="Studio Bela Fit">
+          <span class="equipe-row-label">
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Studio Bela Fit</span>
+              <span class="block text-xs text-gray-400">Pequena · 8 colaboradores</span>
+            </span>
+          </span>
+          <span class="status-pill status-pending">Implantação</span>
+        </button>
+      </div>
+
+      <button class="btn-primary btn-fake-action">Cadastrar nova empresa</button>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item" data-goto="admin-visao-geral">Visão geral</button>
+      <button class="bottom-nav-item active" data-goto="admin-empresas">Empresas</button>
+      <button class="bottom-nav-item" data-goto="admin-usuarios">Usuários</button>
+      <button class="bottom-nav-item" data-goto="admin-agenda">Agenda</button>
+    </nav>
+  </section>
+
+  <!-- ===================== ADMIN (CAMILA): USUÁRIOS ===================== -->
+  <section class="screen" id="screen-admin-usuarios">
+    <header class="screen-header">
+      <span class="screen-header-title-center">Usuários</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="field">
+        <input type="text" placeholder="Buscar usuário..." class="field-input" disabled>
+      </div>
+
+      <div class="chip-grid chip-grid-3" id="filtro-usuarios">
+        <button class="option-chip selected">Todos</button>
+        <button class="option-chip">Funcionários</button>
+        <button class="option-chip">RH / Admin</button>
+      </div>
+
+      <div class="card card-flush">
+        <div class="equipe-row">
+          <span class="equipe-row-label">
+            <span class="user-avatar">MO</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Maria Oliveira</span>
+              <span class="block text-xs text-gray-400">Empresa Exemplo Ltda · Funcionária</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativo</span>
+        </div>
+        <div class="equipe-row">
+          <span class="equipe-row-label">
+            <span class="user-avatar">JS</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Joana Silva</span>
+              <span class="block text-xs text-gray-400">Empresa Exemplo Ltda · RH</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativo</span>
+        </div>
+        <div class="equipe-row">
+          <span class="equipe-row-label">
+            <span class="user-avatar">RS</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Ricardo Souza</span>
+              <span class="block text-xs text-gray-400">Metaltech Joinville · RH</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativo</span>
+        </div>
+        <div class="equipe-row equipe-row-last">
+          <span class="equipe-row-label">
+            <span class="user-avatar">CH</span>
+            <span>
+              <span class="block text-sm font-medium text-gray-900">Camila Haas</span>
+              <span class="block text-xs text-gray-400">LIDERARH · Administradora</span>
+            </span>
+          </span>
+          <span class="status-pill status-ok">Ativo</span>
+        </div>
+      </div>
+
+      <p class="helper-text">Lista consolidada de todos os usuários, de todas as empresas — só a administradora enxerga entre empresas diferentes.</p>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item" data-goto="admin-visao-geral">Visão geral</button>
+      <button class="bottom-nav-item" data-goto="admin-empresas">Empresas</button>
+      <button class="bottom-nav-item active" data-goto="admin-usuarios">Usuários</button>
+      <button class="bottom-nav-item" data-goto="admin-agenda">Agenda</button>
+    </nav>
+  </section>
+
+  <!-- ===================== ADMIN (CAMILA): AGENDA GERAL ===================== -->
+  <section class="screen" id="screen-admin-agenda">
+    <header class="screen-header">
+      <span class="screen-header-title-center">Agenda geral</span>
+      <span class="screen-header-spacer"></span>
+    </header>
+
+    <div class="screen-body">
+      <div class="card card-flush">
+        <div class="list-row-lg">
+          <p class="list-row-lg-date">18/11 · 14h</p>
+          <p class="list-row-lg-title">Empresa Exemplo Ltda</p>
+          <p class="list-row-lg-subtitle">Sobrecarga de demanda na Logística</p>
+        </div>
+        <div class="list-row-lg">
+          <p class="list-row-lg-date">25/11 · 10h</p>
+          <p class="list-row-lg-title">Metaltech Joinville Ltda</p>
+          <p class="list-row-lg-subtitle">Comunicação assertiva entre líderes e produção</p>
+        </div>
+        <div class="list-row-lg list-row-lg-last">
+          <p class="list-row-lg-date">02/12 · 09h</p>
+          <p class="list-row-lg-title">Comércio Araquari ME</p>
+          <p class="list-row-lg-subtitle">Mapeamento inicial de riscos psicossociais</p>
+        </div>
+      </div>
+
+      <p class="helper-text">Cada palestra/mentoria vem do plano contratado pela empresa — recalculada a cada 45–60 dias com base nos check-ins.</p>
+    </div>
+
+    <nav class="bottom-nav bottom-nav-4">
+      <button class="bottom-nav-item" data-goto="admin-visao-geral">Visão geral</button>
+      <button class="bottom-nav-item" data-goto="admin-empresas">Empresas</button>
+      <button class="bottom-nav-item" data-goto="admin-usuarios">Usuários</button>
+      <button class="bottom-nav-item active" data-goto="admin-agenda">Agenda</button>
+    </nav>
+  </section>
+
+</main>
 
 <!-- Toast -->
 <div id="toast" class="toast">Ação registrada (protótipo)</div>
