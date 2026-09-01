@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LIDERARH Check — Protótipo navegável</title>
+<title>Protótipo LIDERARH Check</title>
 <meta name="robots" content="noindex, nofollow">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -11,12 +11,12 @@
 </head>
 <body>
 
-<!-- Aviso do que é este material — full-bleed, deixa claro que não é a UI do produto -->
+<!-- Aviso do que é este material (full-bleed, deixa claro que não é a UI do produto) -->
 <div class="meta-bar meta-bar-dark">
-  Protótipo navegável — telas não funcionais, sem conexão com banco de dados. Serve para validar o fluxo antes do desenvolvimento.
+  Protótipo navegável: telas não funcionais, sem conexão com banco de dados. Serve para validar o fluxo antes do desenvolvimento.
 </div>
 
-<!-- Atalhos de demonstração — não faz parte do produto, só ajuda a navegar durante a apresentação -->
+<!-- Atalhos de demonstração, não fazem parte do produto, só ajudam a navegar durante a apresentação -->
 <div class="meta-bar meta-bar-light">
   <div class="meta-bar-inner">
     <span class="whitespace-nowrap">Atalhos (demo):</span>
@@ -47,7 +47,7 @@
   </div>
 </div>
 
-<!-- Site real, otimizado só para largura de celular — sem moldura de hardware -->
+<!-- Site real, otimizado só para largura de celular, sem moldura de hardware -->
 <main class="shell" id="shell">
 
   <!-- ===================== LOGIN ===================== -->
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <p class="field-hint">Campos desativados neste protótipo — escolha um dos acessos abaixo para navegar.</p>
+      <p class="field-hint">Campos desativados neste protótipo. Escolha um dos acessos abaixo para navegar.</p>
 
       <div class="btn-stack">
         <button class="btn-primary" data-goto="func-home">Entrar como Funcionário</button>
@@ -121,7 +121,7 @@
         </div>
       </div>
 
-      <p class="helper-text">Suas respostas individuais nunca são mostradas para o seu líder — só dados agregados por equipe.</p>
+      <p class="helper-text">Suas respostas individuais nunca são mostradas para o seu líder, só dados agregados por equipe.</p>
     </div>
 
     <nav class="bottom-nav">
@@ -225,7 +225,7 @@
             <span class="option-chip-plan-price">R$ 1.497/mês</span>
           </button>
         </div>
-        <p class="field-hint">Faixa de referência — o valor final é definido na proposta comercial.</p>
+        <p class="field-hint">Faixa de referência. O valor final é definido na proposta comercial.</p>
       </div>
 
       <label class="checkbox-row mt-5">
@@ -286,7 +286,7 @@
       </div>
 
       <button class="btn-primary btn-fake-action">Convidar colaborador</button>
-      <p class="helper-text">O colaborador só vê o próprio check-in — nunca os dados de outros colegas.</p>
+      <p class="helper-text">O colaborador só vê o próprio check-in, nunca os dados de outros colegas.</p>
     </div>
   </section>
 
@@ -349,7 +349,7 @@
         </button>
       </div>
 
-      <p class="helper-text">Os números acima são agregados — nenhuma resposta individual é exibida para o líder.</p>
+      <p class="helper-text">Os números acima são agregados. Nenhuma resposta individual é exibida para o líder.</p>
     </div>
 
     <nav class="bottom-nav bottom-nav-4">
@@ -375,7 +375,7 @@
       </div>
 
       <div class="card">
-        <p class="card-eyebrow">Tendência — últimas 4 semanas</p>
+        <p class="card-eyebrow">Tendência nas últimas 4 semanas</p>
         <div class="trend-bars">
           <div class="bar" style="height:40%"></div>
           <div class="bar" style="height:55%"></div>
@@ -395,7 +395,7 @@
         </ul>
       </div>
 
-      <p class="helper-text">Dado agregado por equipe, sem identificação de quem respondeu — mantém o anonimato do colaborador.</p>
+      <p class="helper-text">Dado agregado por equipe, sem identificação de quem respondeu. Mantém o anonimato do colaborador.</p>
     </div>
   </section>
 
@@ -427,7 +427,7 @@
         <button class="btn-secondary btn-fake-action">Enviar para RH por e-mail</button>
       </div>
 
-      <p class="helper-text">NR-01 — Portaria MTP nº 423/2021. Relatório gerado automaticamente a partir dos check-ins do período.</p>
+      <p class="helper-text">NR-01, Portaria MTP nº 423/2021. Relatório gerado automaticamente a partir dos check-ins do período.</p>
     </div>
 
     <nav class="bottom-nav bottom-nav-4">
@@ -454,7 +454,7 @@
 
       <div class="card">
         <p class="card-eyebrow">Como funciona</p>
-        <p class="text-sm text-gray-700 leading-relaxed">A cada 45–60 dias, os dados agregados do período viram o roteiro de uma palestra ou mentoria presencial — sem precisar de um novo diagnóstico manual a cada visita.</p>
+        <p class="text-sm text-gray-700 leading-relaxed">A cada 45 a 60 dias, os dados agregados do período viram o roteiro de uma palestra ou mentoria presencial, sem precisar de um novo diagnóstico manual a cada visita.</p>
       </div>
 
       <button class="btn-secondary btn-fake-action">Solicitar reagendamento</button>
@@ -501,20 +501,20 @@
       <div class="card card-flush">
         <p class="card-eyebrow card-eyebrow-padded">Alertas de risco alto entre empresas</p>
         <button class="equipe-row" data-goto="rh-painel" data-empresa="Empresa Exemplo Ltda">
-          <span class="equipe-row-label"><i class="dot dot-dark"></i>Empresa Exemplo Ltda — Logística</span>
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Empresa Exemplo Ltda · Logística</span>
           <span class="equipe-row-value">Alto &rsaquo;</span>
         </button>
         <button class="equipe-row" data-goto="rh-painel" data-empresa="Metaltech Joinville Ltda">
-          <span class="equipe-row-label"><i class="dot dot-dark"></i>Metaltech Joinville — Produção</span>
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Metaltech Joinville · Produção</span>
           <span class="equipe-row-value">Alto &rsaquo;</span>
         </button>
         <button class="equipe-row equipe-row-last" data-goto="rh-painel" data-empresa="Comércio Araquari ME">
-          <span class="equipe-row-label"><i class="dot dot-dark"></i>Comércio Araquari — Atendimento</span>
+          <span class="equipe-row-label"><i class="dot dot-dark"></i>Comércio Araquari · Atendimento</span>
           <span class="equipe-row-value">Alto &rsaquo;</span>
         </button>
       </div>
 
-      <p class="helper-text">Visão consolidada entre todas as empresas clientes — cada empresa só enxerga os próprios dados dentro do painel dela.</p>
+      <p class="helper-text">Visão consolidada entre todas as empresas clientes. Cada empresa só enxerga os próprios dados dentro do painel dela.</p>
     </div>
 
     <nav class="bottom-nav bottom-nav-4">
@@ -648,7 +648,7 @@
         </div>
       </div>
 
-      <p class="helper-text">Lista consolidada de todos os usuários, de todas as empresas — só a administradora enxerga entre empresas diferentes.</p>
+      <p class="helper-text">Lista consolidada de todos os usuários, de todas as empresas. Só a administradora enxerga entre empresas diferentes.</p>
     </div>
 
     <nav class="bottom-nav bottom-nav-4">
@@ -685,7 +685,7 @@
         </div>
       </div>
 
-      <p class="helper-text">Cada palestra/mentoria vem do plano contratado pela empresa — recalculada a cada 45–60 dias com base nos check-ins.</p>
+      <p class="helper-text">Cada palestra ou mentoria vem do plano contratado pela empresa, recalculada a cada 45 a 60 dias com base nos check-ins.</p>
     </div>
 
     <nav class="bottom-nav bottom-nav-4">

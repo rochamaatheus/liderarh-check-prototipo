@@ -34,7 +34,7 @@ $(function () {
   // Botões que não têm ação real neste protótipo (envio de e-mail, reagendamento,
   // cadastro de empresa, convite de colaborador etc.) — todos avisam via toast.
   $(document).on("click", ".btn-fake-action", function () {
-    toast("Esta ação não está conectada neste protótipo — é só para validar o fluxo.");
+    toast("Esta ação não está conectada neste protótipo. É só para validar o fluxo.");
   });
 
   // Atalho de demonstração
@@ -144,7 +144,7 @@ $(function () {
 
   // ---- Baixar PDF (fake) ----
   $("#btn-baixar-pdf").on("click", function () {
-    toast("Neste protótipo o PDF não é gerado de verdade — na versão final, baixa aqui.");
+    toast("Neste protótipo o PDF não é gerado de verdade. Na versão final, baixa aqui.");
   });
 
   // ---- Data de hoje nos textos ----
